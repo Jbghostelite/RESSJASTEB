@@ -1,0 +1,407 @@
+<!DOCTE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JASTEB GHOST HOSTING - MASA KINI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff4d4d;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark), #16213e);
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        .price-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .price-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .price-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .price-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        .price-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .order-form {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--accent);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .note {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 77, 77, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .note-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .payment-info {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--secondary);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .price-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JASTEB GHOST HOSTING</h1>
+            <p class="subtitle">RESULTS MASA KINI</p>
+        </header>
+        
+        <div class="price-list">
+            <div class="price-item">
+                <div class="price-amount">3K</div>
+                <div class="price-desc">110 JASTEB</div>
+            </div>
+            <div class="price-item">
+                <div class="price-amount">5K</div>
+                <div class="price-desc">130 JASTEB</div>
+            </div>
+            <div class="price-item">
+                <div class="price-amount">7K</div>
+                <div class="price-desc">150 JASTEB</div>
+            </div>
+            <div class="price-item">
+                <div class="price-amount">10K</div>
+                <div class="price-desc">210 JASTEB</div>
+            </div>
+            <div class="price-item">
+                <div class="price-amount">13K</div>
+                <div class="price-desc">230 JASTEB</div>
+            </div>
+            <div class="price-item">
+                <div class="price-amount">15K</div>
+                <div class="price-desc">250 JASTEB</div>
+            </div>
+            <div class="price-item">
+                <div class="price-amount">17K</div>
+                <div class="price-desc">310 JASTEB</div>
+            </div>
+            <div class="price-item">
+                <div class="price-amount">20K</div>
+                <div class="price-desc">250 JASTEB</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0; font-weight: 600; color: #ffcc00;">
+            ORDER BANYAK KEMUNGKINAN STOK AKUN GG DENGAN GRATIS
+        </div>
+        
+        <div class="order-form">
+            <div class="form-title">FORMAT PESANAN</div>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="email">EMAIL:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">HARGA JASTEB:</label>
+                    <select id="price" required>
+                        <option value="">Pilih Harga</option>
+                        <option value="3K">3K : 110 JASTEB</option>
+                        <option value="5K">5K : 130 JASTEB</option>
+                        <option value="7K">7K : 150 JASTEB</option>
+                        <option value="10K">10K : 210 JASTEB</option>
+                        <option value="13K">13K : 230 JASTEB</option>
+                        <option value="15K">15K : 250 JASTEB</option>
+                        <option value="17K">17K : 310 JASTEB</option>
+                        <option value="20K">20K : 250 JASTEB</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">JUMLAH JASTEB:</label>
+                    <input type="number" id="quantity" required>
+                </div>
+                <div class="form-group">
+                    <label for="wa">NOMOR WA:</label>
+                    <input type="text" id="wa" required placeholder="Contoh: 6281234567890">
+                </div>
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Mengirim pesanan ke Telegram...</p>
+                </div>
+                <button type="submit" id="submitBtn">PESAN SEKARANG</button>
+            </form>
+        </div>
+        
+        <div class="payment-info">
+            PEMBAYARAN💰<br>
+            NANTI AKAN KAMI KIRIM FORMAT PEMBAYARAN NYA ✅
+        </div>
+        
+        <div class="note">
+            <div class="note-title">PERHATIAN:</div>
+            <p>SETELEH SELESAI MELALUI SEMUANYA DAN SUDAH TF TUNGGU AJA JASTEB NYA MASUK</p>
+            <p>JIKA BELUM TF JANGAN BERHARAP JASTEB MASUK - APALAGI MENUNGGU DIA KEMBALI 🥀🥀</p>
+        </div>
+        
+        <footer>
+            JASTEB GHOST HOSTING © 2023 - MASA KINI
+        </footer>
+    </div>
+    
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Tampilkan loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('submitBtn').disabled = true;
+            
+            // Get form values
+            const email = document.getElementById('email').value;
+            const price = document.getElementById('price').value;
+            const quantity = document.getElementById('quantity').value;
+            const wa = document.getElementById('wa').value;
+            
+            // Format message for Telegram
+            const message = `📌 *PESANAN BARU JASTEB* 📌
+📧 *Email:* ${email}
+💰 *Harga Jasteb:* ${price}
+🔢 *Jumlah Jasteb:* ${quantity}
+📱 *WA:* ${wa}
+            
+⏰ *Waktu:* ${new Date().toLocaleString()}
+            
+_Silahkan segera proses pesanan ini_`;
+            
+            try {
+                // Ganti dengan token bot Telegram dan chat ID Anda
+                const botToken = '7815513249:AAGKRD-Cl8_80bXqiU9BYea_k695mJMNWzs';
+                const chatId = '7515215800';
+                const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+                
+                // Kirim ke Telegram
+                const response = await fetch(telegramUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.ok) {
+                    alert('✅ Pesanan berhasil dikirim! Kami akan segera menghubungi Anda via WA untuk konfirmasi pembayaran.');
+                    document.getElementById('orderForm').reset();
+                } else {
+                    throw new Error('Gagal mengirim ke Telegram');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('⚠️ Pesanan berhasil, tetapi notifikasi ke admin gagal. Silakan hubungi admin langsung via WhatsApp.');
+            } finally {
+                // Sembunyikan loading
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('submitBtn').disabled = false;
+            }
+        });
+
+        // Auto-format nomor WA
+        document.getElementById('wa').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('0')) {
+                value = '62' + value.substring(1);
+            } else if (!value.startsWith('62') && value.length > 0) {
+                value = '62' + value;
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
